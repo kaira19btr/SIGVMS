@@ -253,7 +253,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                 <div className="pt-2 flex items-center space-x-3">
                   <button
                     onClick={() => onNavigate('beranda')}
-                    className="px-4 py-2 bg-gradient-to-r from-[#FACC15] to-yellow-500 hover:from-yellow-400 hover:to-yellow-500 text-[#0E3B24] font-extrabold rounded-lg text-xs transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
+                    className="px-3.5 py-1.5 bg-[#FACC15] hover:bg-yellow-400 text-[#0E3B24] font-black rounded-lg text-xs transition-colors flex items-center space-x-1 cursor-pointer"
                   >
                     <span>Lanjutkan ke Dasbor</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -413,25 +413,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                   </div>
 
                   {/* Submit Button with Green Gradient */}
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-3 bg-gradient-to-r from-[#0E3B24] via-[#144E2F] to-[#1B643C] hover:from-[#12492D] hover:via-[#1B643C] hover:to-[#237B4B] text-white font-bold rounded-lg text-xs transition-all shadow-md shadow-emerald-950/20 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <RefreshCw className="w-4 h-4 animate-spin" />
-                          <span>Memverifikasi Identitas ASN...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Masuk Menggunakan Akun SPSE</span>
-                          <ArrowRight className="w-4 h-4 text-[#FACC15]" />
-                        </>
-                      )}
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-3 bg-gradient-to-r from-[#0E3B24] via-[#134B2C] to-[#1E5631] hover:from-[#134B2C] hover:to-[#0E3B24] active:scale-[0.99] text-white font-extrabold rounded-xl text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all disabled:opacity-60 cursor-pointer border border-emerald-600/30"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin text-[#FACC15]" />
+                        <span>Memverifikasi Identitas ASN...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Masuk Menggunakan Akun SPSE</span>
+                        <ArrowRight className="w-4 h-4 text-[#FACC15]" />
+                      </>
+                    )}
+                  </button>
                 </form>
 
                 {/* 1-Click Persona Evaluator Sandbox */}
