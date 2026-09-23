@@ -1,0 +1,6 @@
+{
+  "name": "Sistem GVMS LKPP",
+  "description": "Kalkulator Green Value-for-Money Score untuk evaluasi pengadaan teknologi pengelolaan sampah di Indonesia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
