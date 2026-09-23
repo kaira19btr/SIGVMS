@@ -67,4 +67,15 @@ export interface CustomWeights {
   kesiapanTeknologi: number; // default 0.10
 }
 
-export type PageView = 'beranda' | 'penilaian' | 'hasil' | 'registry' | 'komparasi';
+export interface UserSession {
+  id: string;
+  name: string;
+  nip: string;
+  role: string;
+  agency: string;
+  department: string;
+  certId: string;
+  loginTime: string;
+}
+
+export type PageView = 'beranda' | 'penilaian' | 'hasil' | 'registry' | 'komparasi' | 'login';

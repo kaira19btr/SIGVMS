@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PageView, AssessmentData } from './types/gvms';
+import { PageView, AssessmentData, UserSession } from './types/gvms';
 import { 
   getStoredRegistry, 
   saveStoredRegistry, 
@@ -16,11 +16,27 @@ import { AssessmentFormPage } from './pages/AssessmentFormPage';
 import { ResultsDashboardPage } from './pages/ResultsDashboardPage';
 import { TechnologyRegistryPage } from './pages/TechnologyRegistryPage';
 import { ComparisonPage } from './pages/ComparisonPage';
+import { LoginPage } from './pages/LoginPage';
 
 export function App() {
-  const [currentPage, setCurrentPage] = useState<PageView>('beranda');
+  // Directly start at login page as requested: "terus pas pencet link nya langsung ke halaman login"
+  const [currentPage, setCurrentPage] = useState<PageView>('login');
+  
   const [registry, setRegistry] = useState<AssessmentData[]>(() => getStoredRegistry());
   const [currentAssessment, setCurrentAssessment] = useState<AssessmentData>(() => ({ ...DEFAULT_FORM_STATE }));
+  
+  // Stored user session
+  const [currentUser, setCurrentUser] = useState<UserSession | null>(() => {
+    const saved = localStorage.getItem('gvms_user_session');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  });
   
   // Initialize comparison with first 2 items from registry for immediate discovery
   const [selectedForCompare, setSelectedForCompare] = useState<AssessmentData[]>(() => {
@@ -48,6 +64,15 @@ export function App() {
   useEffect(() => {
     saveStoredRegistry(registry);
   }, [registry]);
+
+  // Sync session changes with localStorage
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem('gvms_user_session', JSON.stringify(currentUser));
+    } else {
+      localStorage.removeItem('gvms_user_session');
+    }
+  }, [currentUser]);
 
   const handleNavigate = (page: PageView) => {
     setCurrentPage(page);
@@ -125,9 +150,31 @@ export function App() {
     handleNavigate('hasil');
   };
 
+  const handleLoginSuccess = (user: UserSession) => {
+    setCurrentUser(user);
+    handleNavigate('beranda');
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    handleNavigate('login');
+  };
+
+  // If on login page, render full LoginPage with integrated official layout
+  if (currentPage === 'login') {
+    return (
+      <LoginPage
+        onLoginSuccess={handleLoginSuccess}
+        onNavigate={handleNavigate}
+        currentUser={currentUser}
+        onLogout={handleLogout}
+      />
+    );
+  }
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFFFFF] text-[#0b1c30]">
-      {/* Top Navigation */}
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#E8F2EC] via-[#F1F6F3] to-[#E3EFE7] text-[#0E2917] selection:bg-[#0E3B24] selection:text-[#FACC15]">
+      {/* Top Navigation - Official Green Gradient Theme */}
       <Navbar
         currentPage={currentPage}
         onNavigate={handleNavigate}
@@ -137,6 +184,8 @@ export function App() {
         onOpenSearch={() => setSearchModalOpen(true)}
         registry={registry}
         onSelectPreset={handleSelectPreset}
+        currentUser={currentUser}
+        onLogout={handleLogout}
       />
 
       {/* Main Screen Content */}
@@ -193,7 +242,7 @@ export function App() {
         )}
       </main>
 
-      {/* Footer */}
+      {/* Institutional Footer */}
       <Footer
         onOpenGuide={() => setGuideModalOpen(true)}
         onOpenHelp={() => setHelpModalOpen(true)}

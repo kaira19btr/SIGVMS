@@ -157,7 +157,7 @@ Opsi rekomendasi terbaik berdasarkan analisis multi-kriteria GVMS adalah "${acti
   };
 
   return (
-    <div className="w-full bg-[#F7F5F0]/60 min-h-screen py-8 px-4 md:px-10">
+    <div className="w-full bg-[#F1F6F3] min-h-screen py-8 px-4 md:px-10 text-[#0E2917]">
       {/* Berita Acara Modal for winner */}
       {activeWinner && (
         <BeritaAcaraModal

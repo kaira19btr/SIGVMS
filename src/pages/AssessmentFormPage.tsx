@@ -230,7 +230,7 @@ export const AssessmentFormPage: React.FC<AssessmentFormPageProps> = ({
   }, [targetScore, scores.gvmsTotal, formData]);
 
   return (
-    <div className="w-full bg-[#F7F5F0]/60 min-h-screen py-8 px-4 md:px-10">
+    <div className="w-full bg-[#F1F6F3] min-h-screen py-8 px-4 md:px-10 text-[#0E2917]">
       {/* Toast alert */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 bg-[#041534] text-white px-4 py-3 rounded-lg shadow-xl border border-[#CBD5E1] text-xs flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2">

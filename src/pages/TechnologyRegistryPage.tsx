@@ -107,7 +107,7 @@ export const TechnologyRegistryPage: React.FC<TechnologyRegistryPageProps> = ({
   const isSelected = (id: string) => selectedForCompare.some((item) => item.id === id);
 
   return (
-    <div className="w-full bg-[#F7F5F0]/60 min-h-screen py-8 px-4 md:px-10 relative">
+    <div className="w-full bg-[#F1F6F3] min-h-screen py-8 px-4 md:px-10 relative text-[#0E2917]">
       {/* Quick View Side Drawer */}
       {quickViewItem && (
         <div className="fixed inset-0 z-50 flex justify-end bg-slate-900/40 backdrop-blur-xs animate-in fade-in">
